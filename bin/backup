@@ -1,6 +1,6 @@
 #!/bin/sh
 
-server=knux
+server=$BACKUP_SERVER
 backupfolder=$BACKUP_PATH
 
 foldername=00-$(hostname -f)-backup-auto #$(date '+%Y-%m-%d')-$(hostname -f)-auto

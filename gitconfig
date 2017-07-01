@@ -1,6 +1,5 @@
-[user]
-	name = Toni Pesola
-	email = pesola.toni@gmail.com
+[include]
+    path = .gitconfig.local
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
