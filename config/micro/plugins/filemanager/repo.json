@@ -1,0 +1,14 @@
+[{
+  "Name": "filemanager",
+  "Description": "File manager for Micro",
+  "Tags": ["filetree", "filemanager", "file", "manager"],
+  "Versions": [
+    {
+      "Version": "1.3.4",
+      "Url": "https://github.com/NicolaiSoeborg/filemanager-plugin/archive/v1.3.4.zip",
+      "Require": {
+        "micro": ">=1.1.5"
+      }
+    }
+  ]
+}]

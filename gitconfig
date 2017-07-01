@@ -1,0 +1,17 @@
+[user]
+	name = Toni Pesola
+	email = pesola.toni@gmail.com
+[alias]
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep "^[[:lower:]]"	
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+[core]
+	editor = micro
+	excludesfile = /home/toni/.gitignore_global

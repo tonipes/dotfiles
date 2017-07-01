@@ -1,0 +1,86 @@
+#! /usr/bin/python
+import os
+import sys
+import getpass
+import argparse
+import subprocess
+
+KEEPASS_CMD = 'keepassxc-cli'
+
+COMMANDS = dict()
+
+def test_password(db_path, password):
+    try:
+        p = subprocess.check_output([KEEPASS_CMD, 'list', db_path], input=password.encode())
+    except:
+        return False
+    return True
+
+class Keepass(object):
+    supported_actions = ['list', 'show', 'clip']
+    
+    def __init__(self, db_path, password):
+        self.db_path = db_path
+        self.password = password
+    
+    def __getitem__(self, action):
+        if action not in self.supported_actions:
+            return False
+        else:
+            return getattr(self, action)()
+            
+    def _run_cmd(self, cmd, *args):
+        try:
+            p = subprocess.check_output([KEEPASS_CMD, cmd, self.db_path, *args], input=self.password.encode())
+        except Exception as e:
+            print(e)
+            return False
+        return True
+
+    def test_password(self):
+        return self._run_cmd('list')
+
+    def list(self, *args):
+        return self._run_cmd('list')
+
+    def show(self, *args):
+        print("Show")
+        return True
+        
+    def clip(self, *args):
+        print("Clip")
+        return True
+    
+def get_password(db_path):
+    return getpass.getpass("Enter password for {}\n> ".format(db_path))
+
+
+def main(args):
+    kp = None #Keepass(args.path, password)
+    
+    run = True
+    while run:
+        while not kp:
+            pw = get_password(args.path)
+            tmp_kp = Keepass(args.path, pw)
+            if tmp_kp.test_password():
+                kp = tmp_kp
+            else:
+                print("Invalid password")
+
+        cmd_str = input("-> ")
+        cmd = cmd_str.split(' ')
+
+        if cmd[0] == 'exit':
+            return 0
+
+        if not kp[cmd[0]]:
+            print("Invalid command or parameters. Supported actions: {}".format(kp.supported_actions))
+
+if __name__ == '__main__':
+    # Parse args
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path', help='Path to keepass DB')
+
+    args = parser.parse_args()
+    main(args)    

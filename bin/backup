@@ -1,0 +1,29 @@
+#!/bin/sh
+
+server=knux
+backupfolder=$BACKUP_PATH
+
+foldername=00-$(hostname -f)-backup-auto #$(date '+%Y-%m-%d')-$(hostname -f)-auto
+folderpath="$backupfolder/$foldername"
+fullurl="$server:$folderpath"
+configpath="$HOME/.config/backup"
+
+echo "Create folder for backup"
+ssh "$server" mkdir -p "$folderpath"
+
+echo "Staring backup to $fullurl"
+START=$(date +%s)
+
+rsync -avz -e ssh --stats -h --recursive --include='*/' --exclude-from="$configpath/backup_exclude" --files-from="$configpath/backup_include" / $fullurl
+if [ "$?" -eq "0" ]
+then
+  echo "Sending healthcheck"
+  curl -fsS --retry 3 $BACKUP_HEALTHCHECK_URL > /dev/null
+else
+  echo "Error while running rsync"
+fi
+
+FINISH=$(date +%s)
+
+echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds."
+exit 0
