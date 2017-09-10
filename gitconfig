@@ -1,5 +1,4 @@
-[include]
-    path = .gitconfig.local
+
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -14,3 +13,9 @@
 [core]
 	editor = micro
 	excludesfile = /home/toni/.gitignore_global
+[include]
+    path = .gitconfig.local
+[includeIf "gitdir:~/Development/work/"]
+    path = .gitconfig_work.local
+[merge]
+    tool = meld

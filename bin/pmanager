@@ -9,29 +9,37 @@ KEEPASS_CMD = 'keepassxc-cli'
 
 COMMANDS = dict()
 
+
 def test_password(db_path, password):
     try:
-        p = subprocess.check_output([KEEPASS_CMD, 'list', db_path], input=password.encode())
-    except:
+        subprocess.check_output(
+            [KEEPASS_CMD, 'list', db_path], input=password.encode()
+        )
+    except Exception as e:
         return False
     return True
 
+
 class Keepass(object):
     supported_actions = ['list', 'show', 'clip']
-    
+
     def __init__(self, db_path, password):
         self.db_path = db_path
         self.password = password
-    
+
     def __getitem__(self, action):
         if action not in self.supported_actions:
             return False
         else:
             return getattr(self, action)()
-            
+
     def _run_cmd(self, cmd, *args):
         try:
-            p = subprocess.check_output([KEEPASS_CMD, cmd, self.db_path, *args], input=self.password.encode())
+            p = subprocess.check_output(
+                [KEEPASS_CMD, cmd, self.db_path, *args],
+                input=self.password.encode()
+            )
+            print(p)
         except Exception as e:
             print(e)
             return False
@@ -46,18 +54,19 @@ class Keepass(object):
     def show(self, *args):
         print("Show")
         return True
-        
+
     def clip(self, *args):
         print("Clip")
         return True
-    
+
+
 def get_password(db_path):
     return getpass.getpass("Enter password for {}\n> ".format(db_path))
 
 
 def main(args):
-    kp = None #Keepass(args.path, password)
-    
+    kp = None  # Keepass(args.path, password)
+
     run = True
     while run:
         while not kp:
@@ -75,7 +84,14 @@ def main(args):
             return 0
 
         if not kp[cmd[0]]:
-            print("Invalid command or parameters. Supported actions: {}".format(kp.supported_actions))
+            print(
+                "Invalid command or parameters. "
+                "Supported actions: {}".format(kp.supported_actions))
+        else:
+            print("Running command {}".format(cmd[0]))
+            a = kp[cmd[0]]
+            print(a)
+
 
 if __name__ == '__main__':
     # Parse args
@@ -83,4 +99,4 @@ if __name__ == '__main__':
     parser.add_argument('path', help='Path to keepass DB')
 
     args = parser.parse_args()
-    main(args)    
+    main(args)

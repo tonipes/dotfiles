@@ -8,4 +8,4 @@ PORT=1022
 #	umount $MOUNT_PATH
 #fi
 
-sshfs -o reconnect -o ServerAliveInterval=15 -o ServerAliveCountMax=3 knux:$REMOTE_PATH $LOCAL_PATH -p $PORT
+sshfs -o reconnect -o allow_other -o ServerAliveInterval=15 -o ServerAliveCountMax=3 knux:$REMOTE_PATH $LOCAL_PATH -p $PORT
