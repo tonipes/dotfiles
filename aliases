@@ -1,3 +1,1 @@
-alias 'peek=GDK_BACKEND=x11 peek'
-alias 'docker-down=docker stop $(docker ps -aq)'
 alias 'gsup=git submodule update --init --recursive'
