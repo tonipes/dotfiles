@@ -35,6 +35,7 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+.directory
 
 # Ignore Vim Session Files #
 ############################
