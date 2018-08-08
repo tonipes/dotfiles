@@ -1,1 +1,2 @@
 alias 'gsup=git submodule update --init --recursive'
+alias 'todo=todo.sh'
