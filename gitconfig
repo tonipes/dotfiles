@@ -23,6 +23,3 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
-[user]
-	email = pesola.toni@gmail.com
-	name = Toni Pesola
