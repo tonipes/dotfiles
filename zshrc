@@ -8,7 +8,7 @@ export EDITOR=/usr/bin/micro
 export VISUAL=/usr/bin/micro
 
 # Path
-PATH="$HOME/.bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
 
 # Aliases
 if [ -f ~/.aliases ]; then
