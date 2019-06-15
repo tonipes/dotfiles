@@ -10,8 +10,8 @@ fi
 # Editors
 #
 
-export EDITOR='micro'
-export VISUAL='micro'
+export EDITOR='nano'
+export VISUAL='nano'
 export PAGER='less'
 
 #

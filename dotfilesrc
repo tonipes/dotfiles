@@ -2,6 +2,7 @@
 repository = ~/Dotfiles
 packages = ['config']
 ignore = [
+    '.gitmodules',
     '.git',
     '.gitignore',
-	'README.md']
+    'README.md']

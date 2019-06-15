@@ -1,2 +1,5 @@
 alias 'gsup=git submodule update --init --recursive'
 alias 'todo=todo.sh'
+
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
