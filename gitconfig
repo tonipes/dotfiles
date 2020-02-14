@@ -11,7 +11,7 @@
   status = auto
 [core]
   editor = micro
-	excludesfile = /home/toni/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [include]
   path = .gitconfig-personal.local
 [includeIf "gitdir:~/Development/work/"]
@@ -23,3 +23,6 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[user]
+	name = Toni Pesola
+	email = pesola.toni@gmail.com
