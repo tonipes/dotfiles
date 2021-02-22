@@ -12,7 +12,8 @@ PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
 PATH="/Applications/Blender.app/Contents/MacOS:$PATH"
 PATH="/Applications/Aseprite.app/Contents/MacOS:$PATH"
 
-export ANDROID_SDK_ROOT=/Users/toni/Library/Android/sdk
+# export ANDROID_SDK_ROOT=/Users/toni/Library/Android/sdk
+export ANDROID_SDK_ROOT=/Applications/Unity/Hub/Editor/2020.2.2f1/PlaybackEngines/AndroidPlayer/SDK
 
 PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
@@ -32,4 +33,4 @@ if [ -f ~/.env.local ]; then
   source ~/.env.local
 fi
 
-# source ~/.bash_profile
+source ~/.bash_profile
