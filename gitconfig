@@ -22,3 +22,5 @@
 [user]
 	name = Toni Pesola
 	email = pesola.toni@gmail.com
+[pull]
+	rebase = false

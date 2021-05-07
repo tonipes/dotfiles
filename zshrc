@@ -33,4 +33,7 @@ if [ -f ~/.env.local ]; then
   source ~/.env.local
 fi
 
-source ~/.bash_profile
+# Bash profile
+if [ -f ~/.bash_profile ]; then
+  source ~/.bash_profile
+fi
