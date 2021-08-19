@@ -47,8 +47,8 @@
 ;; Truncate string
 (setq truncate-string-ellipsis "…")
 
-;; Small margin
-(setq scroll-margin 2)
+;; Margin
+(setq scroll-margin 20)
 
 ;; Increase undo limit
 (setq undo-limit 80000000)
