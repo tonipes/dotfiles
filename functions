@@ -1,7 +1,7 @@
 function serve() {
     local port="${2:-8000}";
     local dir="${1:-.}";
-    python -m http.server --directory "$dir" "$port"
+    python3 -m http.server --directory "$dir" "$port"
 }
 
 function calc() {
