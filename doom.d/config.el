@@ -79,6 +79,22 @@
 ;; LLDB debugger path
 (setq dap-lldb-debug-program `("lldb-vscode"))
 
+;; Set C comment to use // instead of /**/
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    ;; Preferred comment style
+    (setq comment-start "// "
+          comment-end "")))
+
+;; Add underscore to word in c-mode
+(add-hook 'c-mode-common-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
+;; Enable local variables
+(setq-default enable-local-variables t)
+
+;; Tab switching
+(global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
+(global-set-key (kbd "C-S-<tab>") 'centaur-tabs-backward-tab)
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
