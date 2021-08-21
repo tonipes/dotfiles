@@ -68,13 +68,16 @@
 (setq fancy-splash-image (expand-file-name "galaxy.svg" doom-private-dir))
 
 ;; Default tab width
-(setq-default tab-width 2)
+(setq tab-width 2)
 
 ;; Enable time in modeline
 (display-time-mode 1)
 
 ;; Auto save
 (setq auto-save-default t)
+
+;; Fill column
+(setq-default fill-column 120)
 
 ;; LLDB debugger path
 (setq dap-lldb-debug-program `("lldb-vscode"))
@@ -89,12 +92,43 @@
 ;; Add underscore to word in c-mode
 (add-hook 'c-mode-common-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
+;; C formatting
+;; (add-hook 'c-mode-common-hook #'(lambda () (setq c-basic-offset 2)))
+
+;; (setq-default c-basic-offset 2)
+(add-hook! 'c-mode-hook
+  (c-set-style "k&r")
+;;   (c-set-offset 'substatement-open '0)
+;;   (c-set-offset 'inline-open '+)
+;;   (c-set-offset 'block-open '+)
+;;   (c-set-offset 'brace-list-open '+)
+;;   (c-set-offset 'case-label '+))
+)
+
+;; Window ops with cursor keys
+(map! :map evil-window-map
+      "SPC" #'rotate-layout
+      ;; Navigation
+      "<left>"     #'evil-window-left
+      "<down>"     #'evil-window-down
+      "<up>"       #'evil-window-up
+      "<right>"    #'evil-window-right
+      ;; Swapping windows
+      "M-<left>"       #'+evil/window-move-left
+      "M-<down>"       #'+evil/window-move-down
+      "M-<up>"         #'+evil/window-move-up
+      "M-<right>"      #'+evil/window-move-right)
+
 ;; Enable local variables
 (setq-default enable-local-variables t)
 
+;; vsplit on startup
+(evil-window-vsplit)
+
 ;; Tab switching
-(global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
-(global-set-key (kbd "C-S-<tab>") 'centaur-tabs-backward-tab)
+;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
+;; (global-set-key (kbd "C-S-<tab>") 'centaur-tabs-backward-tab)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -111,3 +145,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; .ninja mode
+(load! "ninja-mode.el")

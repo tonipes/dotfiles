@@ -22,7 +22,8 @@
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
  '(safe-local-variable-values
-   '((projectile-project-run-cmd . "./build/source/sm_game")
+   '((projectile-project-run-cmd . "./build/macos/source/sm_game")
+     (projectile-project-run-cmd . "./build/source/sm_game")
      (projectile-project-run-cmd . "build/source/sm_game")
      (projectile-project-compilation-cmd . "ninja -f macos.ninja")))
  '(vc-annotate-background "#282c34")
