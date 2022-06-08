@@ -24,3 +24,5 @@
 	email = pesola.toni@gmail.com
 [pull]
 	rebase = false
+[init]
+	defaultBranch = master

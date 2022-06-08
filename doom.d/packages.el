@@ -51,3 +51,6 @@
 
 ;; dap lldb
 ;;(require 'dap-lldb)
+
+;; evil-tutor
+(package! evil-tutor)

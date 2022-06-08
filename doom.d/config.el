@@ -21,8 +21,8 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "SF Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "SF Pro Text" :size 15))
+(setq doom-font (font-spec :family "Fira Code" :size 15)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 15))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -35,7 +35,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;;(setq display-line-numbers-type t)
 
 ;; When at the beginning of a line, make C-k remove the whole line instead of just
 ;; emtying it
@@ -47,19 +47,25 @@
 ;; Truncate string
 (setq truncate-string-ellipsis "…")
 
+;; Undo
+(setq undo-limit 80000000
+      evil-want-fine-undo t
+      auto-save-default t)
+
 ;; Margin
 (setq scroll-margin 20)
-
-;; Increase undo limit
-(setq undo-limit 80000000)
 
 ;; Word wrap
 (add-hook 'c-mode-common-hook #'+word-wrap-mode)
 
 ;; Initial window size
-;;(setq default-frame-alist '((left . 0) (width . 140) (fullscreen . fullheight)))
 (add-to-list 'default-frame-alist '(height . 80))
 (add-to-list 'default-frame-alist '(width . 200))
+
+;; Performance fix
+;(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+;(setq display-line-numbers-type nil)
+;(setq scroll-conservatively 101)
 
 ;; Delete files to trash
 (setq-default delete-by-moving-to-trash t)
@@ -71,7 +77,7 @@
 (setq tab-width 2)
 
 ;; Enable time in modeline
-(display-time-mode 1)
+;;(display-time-mode 1)
 
 ;; Auto save
 (setq auto-save-default t)
@@ -82,28 +88,48 @@
 ;; LLDB debugger path
 (setq dap-lldb-debug-program `("lldb-vscode"))
 
-;; Set C comment to use // instead of /**/
-(add-hook 'c-mode-common-hook
-  (lambda ()
-    ;; Preferred comment style
-    (setq comment-start "// "
-          comment-end "")))
-
-;; Add underscore to word in c-mode
-(add-hook 'c-mode-common-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+;; Add underscore to word
+(modify-syntax-entry ?_ "w")
 
 ;; C formatting
-;; (add-hook 'c-mode-common-hook #'(lambda () (setq c-basic-offset 2)))
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    (setq c-tab-always-indent nil)
+    (c-set-style "k&r")
+    (setq fill-column 120)
+    (setq c-basic-offset 2)
+    (setq comment-start "// ")
+    (setq comment-end "")
+    (setq +format-with-lsp nil)
+    (modify-syntax-entry ?_ "w")
+    ;; (c-set-offset 'substatement-open '0)
+    (c-set-offset 'inline-open '+)
+    (c-set-offset 'block-open '+)
+    (c-set-offset 'brace-list-open '+)
+    (c-set-offset 'case-label '+)
+  )
+)
+
+;; Disable lsp formatting for cxx
+;; (add-hook 'c-mode-common-hook +format-with-lsp nil)
 
 ;; (setq-default c-basic-offset 2)
-(add-hook! 'c-mode-hook
-  (c-set-style "k&r")
+;; (add-hook! 'c-mode-common-hook
+;;   (c-set-style "k&r")
 ;;   (c-set-offset 'substatement-open '0)
 ;;   (c-set-offset 'inline-open '+)
 ;;   (c-set-offset 'block-open '+)
 ;;   (c-set-offset 'brace-list-open '+)
-;;   (c-set-offset 'case-label '+))
-)
+;;   (c-set-offset 'case-label '+)
+;; )
+
+;; Make line numbder relative
+;; (setq display-line-numbers-type 'relative)
+
+;;(map!
+;;      :n "M-s-<down>" #'evil-window-left
+;;      :n "M-s-<up>" #'evil-window-right
+;;)
 
 ;; Window ops with cursor keys
 (map! :map evil-window-map
@@ -119,11 +145,17 @@
       "M-<up>"         #'+evil/window-move-up
       "M-<right>"      #'+evil/window-move-right)
 
+;; (use-package hl-line+
+;;   :load-path "3rd" ; or wherever you put hl-line+.el
+;;   :config
+;;   (hl-line-when-idle-interval 0.3)
+;;   (toggle-hl-line-when-idle 1))
+
 ;; Enable local variables
-(setq-default enable-local-variables t)
+;; (setq-default enable-local-variables t)
 
 ;; vsplit on startup
-(evil-window-vsplit)
+;; (evil-window-vsplit)
 
 ;; Tab switching
 ;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
@@ -145,6 +177,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; (package! evil-tutor)
 
 ;; .ninja mode
 (load! "ninja-mode.el")
