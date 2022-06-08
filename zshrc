@@ -11,12 +11,15 @@ export VISUAL=/usr/bin/micro
 PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
 PATH="/Applications/Blender.app/Contents/MacOS:$PATH"
 PATH="/Applications/Aseprite.app/Contents/MacOS:$PATH"
+PATH="/usr/local/share/dotnet/x64:$PATH"
+PATH="/usr/local/share/dotnet:$PATH"
 
 # export ANDROID_SDK_ROOT=/Users/toni/Library/Android/sdk
 export ANDROID_SDK_ROOT=/Applications/Unity/Hub/Editor/2020.2.2f1/PlaybackEngines/AndroidPlayer/SDK
 
 PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
+export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
 
 # Aliases
 if [ -f ~/.aliases ]; then
@@ -51,3 +54,5 @@ vterm_printf() {
   fi
 }
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk/bin"

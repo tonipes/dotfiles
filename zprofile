@@ -39,7 +39,10 @@ path=(
   ~/.emacs.d/bin
   /Users/toni/Library/Python/3.9/bin
   /usr/local/{bin,sbin}
+  /usr/local/share/dotnet
   $HOME/.bin
+  $HOME/.local/bin
+  /Library/Frameworks/Mono.framework/Versions/Current/bin
   $path
 )
 
@@ -57,3 +60,4 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
