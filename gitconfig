@@ -21,7 +21,7 @@
 	process = git-lfs filter-process
 [user]
 	name = Toni Pesola
-	email = pesola.toni@gmail.com
+	email = toni@tonipesola.com
 [pull]
 	rebase = false
 [init]
